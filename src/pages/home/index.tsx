@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import TextField from "@mui/material/TextField";
+import LayoutWrapper from "@src/components/LayoutWrapper";
+import styles from "./styles.module.scss";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      Home Page
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+    <div id="outer-container" className={styles.container}>
+      <LayoutWrapper></LayoutWrapper>
     </div>
   );
 };
