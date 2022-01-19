@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 const Home: NextPage = () => {
   return (
     <div>
-      Home Pages
+      Home Page
       <TextField id="outlined-basic" label="Outlined" variant="outlined" />
     </div>
   );
