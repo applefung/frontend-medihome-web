@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import LayoutWrapper from "@src/components/LayoutWrapper";
 import SearchBar from "@src/components/SearchBar";
 import CustomCarousel from "@src/components/CustomCarousel";
+import Section from "@src/components/Section";
 import styles from "./styles.module.scss";
 import { Fragment } from "react";
 
@@ -22,7 +23,9 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <LayoutWrapper>
         <Fragment>
-          <SearchBar />
+          <Section>
+            <SearchBar />
+          </Section>
           <CustomCarousel items={banners} />
         </Fragment>
       </LayoutWrapper>

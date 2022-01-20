@@ -2,6 +2,7 @@ import Image from "next/image";
 import { imageLoader } from "@src/utils/imageLoader";
 import { Input } from "antd";
 import styles from "./styles.module.scss";
+import { LOGO } from "@src/utils/constants/images";
 
 const { Search } = Input;
 
@@ -11,10 +12,8 @@ const SearchBar = () => {
       <Image
         className={styles.logo}
         loader={imageLoader}
-        src={
-          "https://cutewallpaper.org/24/health-logo-png/free-medical-logo-creator-hospital-pharmacy-logodesign.png"
-        }
-        alt="logo"
+        src={LOGO.logoUrl}
+        alt={LOGO.logoAlt}
         width="250px"
         height="120px"
       ></Image>
@@ -25,7 +24,6 @@ const SearchBar = () => {
         // loading
         className={styles.searchBar}
       />
-      <div className={styles.rightmost} />
     </div>
   );
 };
