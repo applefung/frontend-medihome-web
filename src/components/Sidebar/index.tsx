@@ -1,38 +1,47 @@
-import { elastic as Menu } from "react-burger-menu";
+import { Menu } from "antd";
+import {
+  AppstoreOutlined,
+  PieChartOutlined,
+  DesktopOutlined,
+  ContainerOutlined,
+  MailOutlined,
+} from "@ant-design/icons";
+
+const { SubMenu } = Menu;
 
 const Sidebar = () => {
   return (
     <div>
-      <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
-        <a key="0" href="">
-          <i className="fa fa-fw fa-star-o" />
-          <span>Favorites</span>
-        </a>
-        ,
-        <a key="1" href="">
-          <i className="fa fa-fw fa-bell-o" />
-          <span>Alerts</span>
-        </a>
-        ,
-        <a key="2" href="">
-          <i className="fa fa-fw fa-envelope-o" />
-          <span>Messages</span>
-        </a>
-        ,
-        <a key="3" href="">
-          <i className="fa fa-fw fa-comment-o" />
-          <span>Comments</span>
-        </a>
-        ,
-        <a key="4" href="">
-          <i className="fa fa-fw fa-bar-chart-o" />
-          <span>Analytics</span>
-        </a>
-        ,
-        <a key="5" href="">
-          <i className="fa fa-fw fa-newspaper-o" />
-          <span>Reading List</span>
-        </a>
+      <Menu
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        mode="inline"
+        theme="dark"
+        inlineCollapsed={false}
+      >
+        <Menu.Item key="1" icon={<PieChartOutlined />}>
+          Option 1
+        </Menu.Item>
+        <Menu.Item key="2" icon={<DesktopOutlined />}>
+          Option 2
+        </Menu.Item>
+        <Menu.Item key="3" icon={<ContainerOutlined />}>
+          Option 3
+        </Menu.Item>
+        <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
+          <Menu.Item key="5">Option 5</Menu.Item>
+          <Menu.Item key="6">Option 6</Menu.Item>
+          <Menu.Item key="7">Option 7</Menu.Item>
+          <Menu.Item key="8">Option 8</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
+          <Menu.Item key="9">Option 9</Menu.Item>
+          <Menu.Item key="10">Option 10</Menu.Item>
+          <SubMenu key="sub3" title="Submenu">
+            <Menu.Item key="11">Option 11</Menu.Item>
+            <Menu.Item key="12">Option 12</Menu.Item>
+          </SubMenu>
+        </SubMenu>
       </Menu>
     </div>
   );

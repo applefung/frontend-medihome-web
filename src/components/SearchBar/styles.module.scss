@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+
+  .logo {
+    flex: 1;
+  }
+
+  .searchBar {
+    flex: 2;
+  }
+
+  .rightmost {
+    flex: 1;
+  }
+}

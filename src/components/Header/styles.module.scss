@@ -1,0 +1,59 @@
+.container {
+  display: block;
+
+  .menuContainer {
+    margin: 10px 10px;
+  }
+
+  .rightContainer {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin: 10px 10px;
+    padding: 5px 0px;
+
+    .signInContainer {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+
+      .signInInnerContainer {
+        display: flex;
+        align-items: center;
+
+        .signIn {
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
+          }
+        }
+
+        .signUp {
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
+          }
+        }
+      }
+    }
+
+    .languageContainer {
+      display: flex;
+      align-items: center;
+
+      .chinese {
+        &:hover {
+          cursor: pointer;
+          color: $hover-color;
+        }
+      }
+
+      .english {
+        &:hover {
+          cursor: pointer;
+          color: $hover-color;
+        }
+      }
+    }
+  }
+}
