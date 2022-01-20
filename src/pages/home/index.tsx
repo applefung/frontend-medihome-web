@@ -3,6 +3,7 @@ import LayoutWrapper from "@src/components/LayoutWrapper";
 import SearchBar from "@src/components/SearchBar";
 import CustomCarousel from "@src/components/CustomCarousel";
 import Section from "@src/components/Section";
+import VerticalMenu from "@src/components/VerticalMenu";
 import styles from "./styles.module.scss";
 import { Fragment } from "react";
 
@@ -26,7 +27,12 @@ const Home: NextPage = () => {
           <Section>
             <SearchBar />
           </Section>
-          <CustomCarousel items={banners} />
+          <Section>
+            <Fragment>
+              {/* <VerticalMenu /> */}
+              <CustomCarousel items={banners} />
+            </Fragment>
+          </Section>
         </Fragment>
       </LayoutWrapper>
     </div>
