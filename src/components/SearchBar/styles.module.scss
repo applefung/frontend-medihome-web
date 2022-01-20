@@ -1,17 +1,21 @@
 .container {
   display: flex;
-  align-items: center;
-  width: 70%;
+  justify-content: center;
+  .innerContainer {
+    display: flex;
+    align-items: center;
+    width: 70%;
 
-  .logo {
-    flex: 2;
-  }
+    .logo {
+      flex: 2;
+    }
 
-  .searchBar {
-    flex: 2;
-  }
+    .searchBar {
+      flex: 2;
+    }
 
-  .rightmost {
-    flex: 1;
+    .rightmost {
+      flex: 1;
+    }
   }
 }

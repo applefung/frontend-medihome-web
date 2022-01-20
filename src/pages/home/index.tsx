@@ -28,11 +28,9 @@ const Home: NextPage = () => {
             <SearchBar />
           </Section>
           <Section>
-            <Fragment>
-              {/* <VerticalMenu /> */}
-              <CustomCarousel items={banners} />
-            </Fragment>
+            <CustomCarousel items={banners} />
           </Section>
+          <VerticalMenu />
         </Fragment>
       </LayoutWrapper>
     </div>
