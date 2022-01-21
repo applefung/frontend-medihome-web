@@ -6,12 +6,14 @@ import { MenuItem } from "@src/types/menu";
 
 interface CustomDropdownProps {
   children: JSX.Element;
-  items: any[];
+  items: MenuItem[];
 }
 
 const CustomDropdown = ({ children, items }: CustomDropdownProps) => {
   return (
-    <Dropdown overlay={<HorizontalMenu items={items} />}>{children}</Dropdown>
+    <div className={styles.container}>
+      <Dropdown overlay={<HorizontalMenu items={items} />}>{children}</Dropdown>
+    </div>
   );
 };
 

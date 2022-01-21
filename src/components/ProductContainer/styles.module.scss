@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .innerContainer {
+    width: 70%;
+
+    .productContainer {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 10px;
+    }
+  }
+}

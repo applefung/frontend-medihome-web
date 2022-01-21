@@ -1,2 +1,31 @@
 .container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+
+  .innerContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+
+    .dropdownOuterContainer {
+      margin: 0 10px;
+      flex: 2;
+
+      .dropdownContainer {
+        display: flex;
+        align-items: center;
+
+        .dropdown {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .searchContainer {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
