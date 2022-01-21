@@ -20,7 +20,7 @@ const CustomCarousel = ({ items, autoplay = false }: CustomCarouselProps) => {
               alt="logo"
               width="800px"
               height="450px"
-            ></Image>
+            />
           </div>
         ))}
       </Carousel>
