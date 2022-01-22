@@ -1,0 +1,29 @@
+.container {
+  .dropdownOuterContainer {
+    display: flex;
+    justify-content: center;
+
+    .dropdownContainer {
+      margin: 0 10px;
+
+      .dropdownInnerContainer {
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .doctorContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    .doctorInnerContainer {
+      width: 70%;
+    }
+  }
+}

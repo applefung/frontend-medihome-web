@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  border: 1px solid $primary-color;
+  align-items: center;
+
+  .doctorContainer {
+    display: flex;
+
+    .doctorInfoContainer {
+      // flex: 1;
+    }
+
+    .rating {
+      flex: 1;
+      color: $deep-yellow;
+    }
+  }
+}
