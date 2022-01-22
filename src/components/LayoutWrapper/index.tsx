@@ -2,6 +2,7 @@ import Sidebar from "@src/components/Sidebar";
 import Header from "@src/components/Header";
 import styles from "./styles.module.scss";
 import { useState } from "react";
+import Footer from "../Footer";
 
 const LayoutWrapper = ({ children }: Record<"children", JSX.Element>) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -11,6 +12,7 @@ const LayoutWrapper = ({ children }: Record<"children", JSX.Element>) => {
       <Header isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       {isCollapsed && <Sidebar />}
       {children}
+      <Footer />
     </div>
   );
 };

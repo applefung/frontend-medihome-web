@@ -15,8 +15,8 @@ const SearchBar = () => {
           loader={imageLoader}
           src={LOGO.logoUrl}
           alt={LOGO.logoAlt}
-          width="250px"
-          height="120px"
+          width="250"
+          height="120"
         ></Image>
         <Search
           placeholder="input search text"

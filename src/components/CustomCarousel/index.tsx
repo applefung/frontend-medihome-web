@@ -18,8 +18,8 @@ const CustomCarousel = ({ items, autoplay = false }: CustomCarouselProps) => {
               loader={imageLoader}
               src={src}
               alt="logo"
-              width="800px"
-              height="450px"
+              width="800"
+              height="450"
             />
           </div>
         ))}

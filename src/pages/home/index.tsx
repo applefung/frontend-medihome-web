@@ -7,6 +7,7 @@ import DoctorFilter from "@src/components/DoctorFilter";
 import styles from "./styles.module.scss";
 import { Fragment } from "react";
 import ProductContainer from "@src/components/ProductContainer";
+import ArticleCardContainer from "@src/components/ArticleCardContainer";
 
 const banners = [
   {
@@ -81,6 +82,9 @@ const Home: NextPage = () => {
           </Section>
           <Section>
             <ProductContainer title="Medicine" items={products} />
+          </Section>
+          <Section>
+            <ArticleCardContainer />
           </Section>
         </Fragment>
       </LayoutWrapper>

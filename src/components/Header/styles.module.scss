@@ -24,14 +24,14 @@
         .signIn {
           &:hover {
             cursor: pointer;
-            color: $hover-color;
+            color: $primary-color;
           }
         }
 
         .signUp {
           &:hover {
             cursor: pointer;
-            color: $hover-color;
+            color: $primary-color;
           }
         }
       }
@@ -44,14 +44,14 @@
       .chinese {
         &:hover {
           cursor: pointer;
-          color: $hover-color;
+          color: $primary-color;
         }
       }
 
       .english {
         &:hover {
           cursor: pointer;
-          color: $hover-color;
+          color: $primary-color;
         }
       }
     }

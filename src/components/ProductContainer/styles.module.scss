@@ -9,6 +9,14 @@
       display: grid;
       grid-template-columns: auto auto auto;
       gap: 10px;
+
+      @include respond-below(lg) {
+        grid-template-columns: auto auto;
+      }
+
+      @include respond-below(sm) {
+        grid-template-columns: auto;
+      }
     }
   }
 }

@@ -1,0 +1,64 @@
+.container {
+  .topicContainer {
+    background-color: $primary-color;
+    color: $white;
+    width: 100px;
+    text-align: center;
+  }
+
+  .articleContainer {
+    display: flex;
+    align-items: center;
+    border-top: 5px solid $primary-color;
+    @include respond-below(lg) {
+      flex-direction: column;
+    }
+
+    .imageContainer {
+      margin: 10px 0;
+      flex: 1;
+
+      .imageInnerContainer {
+        display: flex;
+        justify-content: center;
+
+        .image {
+          width: 100%;
+        }
+      }
+    }
+
+    .contentContainer {
+      flex: 1;
+
+      .writerContainer {
+        display: flex;
+        margin: 10px 0;
+
+        .writer {
+          flex: 1;
+        }
+
+        .time {
+          flex: 1;
+        }
+      }
+
+      .moreContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px 0;
+      }
+    }
+
+    .tagContainer {
+      display: flex;
+
+      .tag {
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        margin: 0 5px;
+      }
+    }
+  }
+}

@@ -15,8 +15,8 @@ const ProductCard = ({ image, title, description }: ProductCardContent) => {
           loader={imageLoader}
           alt="product card"
           src={image}
-          width="300px"
-          height="182px"
+          width="300"
+          height="182"
         />
       }
     >
