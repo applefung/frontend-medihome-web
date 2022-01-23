@@ -1,13 +1,10 @@
-import { Tabs } from "antd";
 import { imageLoader } from "@src/utils/imageLoader";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import LayoutWrapper from "@src/components/LayoutWrapper";
 import { Fragment } from "react";
-import BasicInformation from "@src/components/BasicInformation";
-import Timetable from "@src/components/Timetable";
-
-const { TabPane } = Tabs;
+import DoctorBasicInformation from "@src/components/DoctorBasicInformation";
+import ClinicDetail from "@src/components/ClinicDetail";
 
 const basicInformation = [
   {
@@ -38,15 +35,15 @@ const DoctorDetail = () => {
               <div>眼科</div>
             </div>
           </div>
-          <div className={styles.tabContainer}>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Basic Information" key="1">
-                <BasicInformation items={basicInformation} />
-              </TabPane>
-              <TabPane tab="Book Now" key="2">
-                <Timetable />
-              </TabPane>
-            </Tabs>
+          <div className={styles.doctorDetailContainer}>
+            <div className={styles.doctorDetailInnerContainer}>
+              <div className={styles.basicInformationContainer}>
+                <DoctorBasicInformation items={basicInformation} />
+              </div>
+              <div className={styles.clinicDetailContainer}>
+                <ClinicDetail />
+              </div>
+            </div>
           </div>
         </Fragment>
       </LayoutWrapper>

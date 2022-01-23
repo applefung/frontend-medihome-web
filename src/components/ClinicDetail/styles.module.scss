@@ -1,0 +1,19 @@
+.container {
+  .contactContainer {
+    display: flex;
+    .contactKey {
+      margin-right: 10px;
+    }
+  }
+
+  .businessHourContainer {
+    display: flex;
+    .businessHourKey {
+      margin-right: 10px;
+    }
+  }
+
+  .time {
+    margin: 10px 10px 10px 0px;
+  }
+}

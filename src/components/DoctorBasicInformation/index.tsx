@@ -4,7 +4,7 @@ interface BasicInformationProps {
   items: Record<"title" | "description", string>[];
 }
 
-const BasicInformation = ({ items }: BasicInformationProps) => {
+const DoctorBasicInformation = ({ items }: BasicInformationProps) => {
   return (
     <div className={styles.container}>
       {items.map(({ title, description }, index) => (
@@ -17,4 +17,4 @@ const BasicInformation = ({ items }: BasicInformationProps) => {
   );
 };
 
-export default BasicInformation;
+export default DoctorBasicInformation;
