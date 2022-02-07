@@ -5,21 +5,12 @@ import CustomCarousel from "@src/components/CustomCarousel";
 import Section from "@src/components/Section";
 import DoctorFilter from "@src/components/DoctorFilter";
 import styles from "./styles.module.scss";
-import { Fragment } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import ProductContainer from "@src/components/ProductContainer";
 import ArticleCardContainer from "@src/components/ArticleCardContainer";
-
-const banners = [
-  {
-    src: "https://www.capgemini.com/wp-content/uploads/2021/04/Web-Preview_Banner-Health_800X450.jpg",
-  },
-  {
-    src: "https://www.capgemini.com/wp-content/uploads/2021/04/Web-Preview_Banner-Health_800X450.jpg",
-  },
-  {
-    src: "https://www.capgemini.com/wp-content/uploads/2021/04/Web-Preview_Banner-Health_800X450.jpg",
-  },
-];
+import { getCarousels } from "@src/services/carousel";
+import { CarouselBanners, CarouselType } from "@src/types/carouse";
+import { useApiRequest } from "@src/utils/api";
 
 const products = [
   {
@@ -67,6 +58,21 @@ const products = [
 ];
 
 const Home: NextPage = () => {
+  const [carousels, setCarousels] = useState<CarouselBanners>([]);
+  const { submit } = useApiRequest(getCarousels);
+
+  const init = useCallback(async () => {
+    const result = await submit();
+    const carouselResults = (result?.data as CarouselType[]).map(({ url }) => ({
+      url,
+    }));
+    setCarousels(carouselResults);
+  }, [submit]);
+
+  useEffect(() => {
+    init();
+  }, [init]);
+
   return (
     <div className={styles.container}>
       <LayoutWrapper>
@@ -75,7 +81,7 @@ const Home: NextPage = () => {
             <SearchBar />
           </Section>
           <Section>
-            <CustomCarousel items={banners} />
+            <CustomCarousel items={carousels} />
           </Section>
           <Section>
             <DoctorFilter />
