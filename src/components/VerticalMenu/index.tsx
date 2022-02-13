@@ -1,10 +1,5 @@
-import styles from "./styles.module.scss";
-import { Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { Menu } from 'antd';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 

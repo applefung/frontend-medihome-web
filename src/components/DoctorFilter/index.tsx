@@ -1,10 +1,10 @@
-import { DownOutlined, MedicineBoxOutlined } from "@ant-design/icons";
-import CustomDropdown from "@src/components/CustomDropdown";
-import { homeTranslations } from "@src/translations";
-import { Locale } from "@src/types/translations";
-import { Button } from "antd";
-import { useRouter } from "next/router";
-import styles from "./styles.module.scss";
+import { DownOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import CustomDropdown from '@src/components/CustomDropdown';
+import { homeTranslations } from '@src/translations';
+import { Locale } from '@src/types/translations';
+import { Button } from 'antd';
+import { useRouter } from 'next/router';
+import styles from './styles.module.scss';
 
 const DoctorFilter = () => {
   const { locale } = useRouter();
@@ -12,30 +12,30 @@ const DoctorFilter = () => {
 
   const specialties = [
     {
-      content: "anaesthesiology",
+      content: 'anaesthesiology',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "anatomicalPathology",
+      content: 'anatomicalPathology',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "cardiology",
+      content: 'cardiology',
       icon: <MedicineBoxOutlined />,
     },
   ];
 
   const districts = [
     {
-      content: "Mong Kok",
+      content: 'Mong Kok',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "Kwun Tung",
+      content: 'Kwun Tung',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "Ngau Tau Kok",
+      content: 'Ngau Tau Kok',
       icon: <MedicineBoxOutlined />,
     },
   ];
@@ -46,9 +46,7 @@ const DoctorFilter = () => {
         <div className={styles.dropdownOuterContainer}>
           <CustomDropdown items={specialties}>
             <div className={styles.dropdownContainer}>
-              <div className={styles.dropdown}>
-                {homeTranslation["specialty"]}
-              </div>
+              <div className={styles.dropdown}>{homeTranslation['specialty']}</div>
               <DownOutlined />
             </div>
           </CustomDropdown>
@@ -56,15 +54,13 @@ const DoctorFilter = () => {
         <div className={styles.dropdownOuterContainer}>
           <CustomDropdown items={districts}>
             <div className={styles.dropdownContainer}>
-              <div className={styles.dropdown}>
-                {homeTranslation["district"]}
-              </div>
+              <div className={styles.dropdown}>{homeTranslation['district']}</div>
               <DownOutlined />
             </div>
           </CustomDropdown>
         </div>
         <div className={styles.searchContainer}>
-          <Button>{homeTranslation["search"]}</Button>
+          <Button>{homeTranslation['search']}</Button>
         </div>
       </div>
     </div>

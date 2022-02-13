@@ -1,59 +1,53 @@
-import type { NextPage } from "next";
-import LayoutWrapper from "@src/components/LayoutWrapper";
-import SearchBar from "@src/components/SearchBar";
-import CustomCarousel from "@src/components/CustomCarousel";
-import Section from "@src/components/Section";
-import DoctorFilter from "@src/components/DoctorFilter";
-import styles from "./styles.module.scss";
-import { Fragment, useCallback, useEffect, useState } from "react";
-import ProductContainer from "@src/components/ProductContainer";
-import ArticleCardContainer from "@src/components/ArticleCardContainer";
-import { getCarousels } from "@src/services/carousel";
-import { CarouselBanners, CarouselType } from "@src/types/carouse";
-import { useApiRequest } from "@src/utils/api";
+import type { NextPage } from 'next';
+import LayoutWrapper from '@src/components/LayoutWrapper';
+import SearchBar from '@src/components/SearchBar';
+import CustomCarousel from '@src/components/CustomCarousel';
+import Section from '@src/components/Section';
+import DoctorFilter from '@src/components/DoctorFilter';
+import { useCallback, useEffect, useState } from 'react';
+import ProductContainer from '@src/components/ProductContainer';
+import ArticleCardContainer from '@src/components/ArticleCardContainer';
+import { getCarousels } from '@src/services/carousel';
+import { CarouselBanners, CarouselType } from '@src/types/carousel';
+import { useApiRequest } from '@src/utils/api';
+import styles from './styles.module.scss';
 
 const products = [
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
   {
     image:
-      "https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format",
-    title: "Panadol",
-    description:
-      "Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.",
+      'https://i-cf65.ch-static.com/content/dam/cf-consumer-healthcare/panadol/en_ie/ireland-products/panadol-tablets/MGK5158-GSK-Panadol-Tablets-455x455.png?auto=format',
+    title: 'Panadol',
+    description: 'Paracetamol, also known as acetaminophen, is a medication used to treat fever and mild to moderate pain.',
   },
 ];
 
@@ -76,7 +70,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <LayoutWrapper>
-        <Fragment>
+        <>
           <Section>
             <SearchBar />
           </Section>
@@ -92,7 +86,7 @@ const Home: NextPage = () => {
           <Section>
             <ArticleCardContainer />
           </Section>
-        </Fragment>
+        </>
       </LayoutWrapper>
     </div>
   );

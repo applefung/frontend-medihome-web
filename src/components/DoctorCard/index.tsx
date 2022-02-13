@@ -1,6 +1,6 @@
-import { imageLoader } from "@src/utils/imageLoader";
-import Image from "next/image";
-import styles from "./styles.module.scss";
+import { imageLoader } from '@src/utils/imageLoader';
+import Image from 'next/image';
+import styles from './styles.module.scss';
 
 const DoctorCard = () => {
   return (

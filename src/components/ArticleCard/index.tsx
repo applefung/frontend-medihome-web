@@ -1,6 +1,6 @@
-import { imageLoader } from "@src/utils/imageLoader";
-import Image from "next/image";
-import styles from "./styles.module.scss";
+import { imageLoader } from '@src/utils/imageLoader';
+import Image from 'next/image';
+import styles from './styles.module.scss';
 
 const ArticleCard = () => {
   return (
@@ -15,7 +15,7 @@ const ArticleCard = () => {
               alt="Article"
               width="300"
               height="300"
-            ></Image>
+            />
           </div>
         </div>
         <div className={styles.contentContainer}>
@@ -30,9 +30,7 @@ const ArticleCard = () => {
             <div className={styles.writer}>Mango Chan</div>
             <div className={styles.time}>2022-01-11 20:30</div>
           </div>
-          <div>
-            許多家長總會希望孩子在發育時期多加攝取營養，促進發育，所以市面上有關兒童腦部發展的食品可謂五花八門。
-          </div>
+          <div>許多家長總會希望孩子在發育時期多加攝取營養，促進發育，所以市面上有關兒童腦部發展的食品可謂五花八門。</div>
           <div className={styles.moreContainer}>More</div>
         </div>
       </div>

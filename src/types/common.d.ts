@@ -3,9 +3,6 @@ export interface ResponseSuccessType<T> {
   status: number;
 }
 
-export type ResponseFailType = Record<"code" | "message" | "details", string>;
+export type ResponseFailType = Record<'code' | 'message' | 'details', string>;
 
-export type DatabaseDates = Record<
-  "createdAt" | "updatedAt" | "deletedAt",
-  string
->;
+export type DatabaseDates = Record<'createdAt' | 'updatedAt' | 'deletedAt', string>;

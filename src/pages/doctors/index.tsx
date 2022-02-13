@@ -1,43 +1,42 @@
-import { DownOutlined, MedicineBoxOutlined } from "@ant-design/icons";
-import CustomDropdown from "@src/components/CustomDropdown";
-import DoctorCard from "@src/components/DoctorCard";
-import LayoutWrapper from "@src/components/LayoutWrapper";
-import Section from "@src/components/Section";
-import { homeTranslations } from "@src/translations";
-import { Locale } from "@src/types/translations";
-import { useRouter } from "next/router";
-import { Fragment } from "react";
-import styles from "./styles.module.scss";
+import { DownOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import CustomDropdown from '@src/components/CustomDropdown';
+import DoctorCard from '@src/components/DoctorCard';
+import LayoutWrapper from '@src/components/LayoutWrapper';
+import Section from '@src/components/Section';
+import { homeTranslations } from '@src/translations';
+import { Locale } from '@src/types/translations';
+import { useRouter } from 'next/router';
+import styles from './styles.module.scss';
 
 const Doctors = () => {
   const { locale } = useRouter();
   const homeTranslation = homeTranslations[locale as Locale];
   const specialties = [
     {
-      content: "anaesthesiology",
+      content: 'anaesthesiology',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "anatomicalPathology",
+      content: 'anatomicalPathology',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "cardiology",
+      content: 'cardiology',
       icon: <MedicineBoxOutlined />,
     },
   ];
 
   const districts = [
     {
-      content: "Mong Kok",
+      content: 'Mong Kok',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "Kwun Tung",
+      content: 'Kwun Tung',
       icon: <MedicineBoxOutlined />,
     },
     {
-      content: "Ngau Tau Kok",
+      content: 'Ngau Tau Kok',
       icon: <MedicineBoxOutlined />,
     },
   ];
@@ -45,15 +44,13 @@ const Doctors = () => {
   return (
     <div className={styles.container}>
       <LayoutWrapper>
-        <Fragment>
+        <>
           <Section>
             <div className={styles.dropdownOuterContainer}>
               <div className={styles.dropdownContainer}>
                 <CustomDropdown items={specialties}>
                   <div className={styles.dropdownInnerContainer}>
-                    <div className={styles.dropdown}>
-                      {homeTranslation["specialty"]}
-                    </div>
+                    <div className={styles.dropdown}>{homeTranslation['specialty']}</div>
                     <DownOutlined />
                   </div>
                 </CustomDropdown>
@@ -61,9 +58,7 @@ const Doctors = () => {
               <div className={styles.dropdownContainer}>
                 <CustomDropdown items={districts}>
                   <div className={styles.dropdownInnerContainer}>
-                    <div className={styles.dropdown}>
-                      {homeTranslation["district"]}
-                    </div>
+                    <div className={styles.dropdown}>{homeTranslation['district']}</div>
                     <DownOutlined />
                   </div>
                 </CustomDropdown>
@@ -82,7 +77,7 @@ const Doctors = () => {
               </div>
             </div>
           </Section>
-        </Fragment>
+        </>
       </LayoutWrapper>
     </div>
   );

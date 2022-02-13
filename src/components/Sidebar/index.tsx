@@ -1,24 +1,12 @@
-import { Menu } from "antd";
-import {
-  AppstoreOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import { Menu } from 'antd';
+import { AppstoreOutlined, PieChartOutlined, DesktopOutlined, ContainerOutlined, MailOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
 const Sidebar = () => {
   return (
     <div>
-      <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        mode="inline"
-        theme="dark"
-        inlineCollapsed={false}
-      >
+      <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark" inlineCollapsed={false}>
         <Menu.Item key="1" icon={<PieChartOutlined />}>
           Option 1
         </Menu.Item>

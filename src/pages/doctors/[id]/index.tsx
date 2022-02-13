@@ -1,19 +1,18 @@
-import { imageLoader } from "@src/utils/imageLoader";
-import Image from "next/image";
-import styles from "./styles.module.scss";
-import LayoutWrapper from "@src/components/LayoutWrapper";
-import { Fragment } from "react";
-import DoctorBasicInformation from "@src/components/DoctorBasicInformation";
-import ClinicDetail from "@src/components/ClinicDetail";
+import { imageLoader } from '@src/utils/imageLoader';
+import Image from 'next/image';
+import LayoutWrapper from '@src/components/LayoutWrapper';
+import DoctorBasicInformation from '@src/components/DoctorBasicInformation';
+import ClinicDetail from '@src/components/ClinicDetail';
+import styles from './styles.module.scss';
 
 const basicInformation = [
   {
-    title: "語言",
-    description: "廣東話、英語、普通話",
+    title: '語言',
+    description: '廣東話、英語、普通話',
   },
   {
-    title: "服務",
-    description: "全面眼睛檢查",
+    title: '服務',
+    description: '全面眼睛檢查',
   },
 ];
 
@@ -21,7 +20,7 @@ const DoctorDetail = () => {
   return (
     <div className={styles.container}>
       <LayoutWrapper>
-        <Fragment>
+        <>
           <div className={styles.doctorContainer}>
             <Image
               loader={imageLoader}
@@ -45,7 +44,7 @@ const DoctorDetail = () => {
               </div>
             </div>
           </div>
-        </Fragment>
+        </>
       </LayoutWrapper>
     </div>
   );

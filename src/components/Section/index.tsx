@@ -1,6 +1,6 @@
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
-const Section = ({ children }: Record<"children", JSX.Element>) => {
+const Section = ({ children }: Record<'children', JSX.Element>) => {
   return <div className={styles.container}>{children}</div>;
 };
 

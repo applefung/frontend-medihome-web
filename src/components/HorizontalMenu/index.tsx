@@ -1,6 +1,5 @@
-import { MenuItem } from "@src/types/menu";
-import { Menu } from "antd";
-import styles from "./styles.module.scss";
+import { MenuItem } from '@src/types/menu';
+import { Menu } from 'antd';
 
 interface HorizontalMenuProps {
   items: MenuItem[];

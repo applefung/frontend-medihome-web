@@ -1,10 +1,10 @@
-import Sidebar from "@src/components/Sidebar";
-import Header from "@src/components/Header";
-import styles from "./styles.module.scss";
-import { useState } from "react";
-import Footer from "../Footer";
+import { useState } from 'react';
+import Sidebar from '@src/components/Sidebar';
+import Header from '@src/components/Header';
+import Footer from '@src/components/Footer';
+import styles from './styles.module.scss';
 
-const LayoutWrapper = ({ children }: Record<"children", JSX.Element>) => {
+const LayoutWrapper = ({ children }: Record<'children', JSX.Element>) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (

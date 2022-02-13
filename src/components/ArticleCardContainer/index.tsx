@@ -1,5 +1,5 @@
-import ArticleCard from "@src/components/ArticleCard";
-import styles from "./styles.module.scss";
+import ArticleCard from '@src/components/ArticleCard';
+import styles from './styles.module.scss';
 
 const ArticleCardContainer = () => {
   return (

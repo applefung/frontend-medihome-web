@@ -1,7 +1,7 @@
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface BasicInformationProps {
-  items: Record<"title" | "description", string>[];
+  items: Record<'title' | 'description', string>[];
 }
 
 const DoctorBasicInformation = ({ items }: BasicInformationProps) => {

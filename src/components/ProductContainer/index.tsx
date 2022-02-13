@@ -1,6 +1,6 @@
-import ProductCard from "@src/components/ProductCard";
-import { ProductCardContent } from "@src/types/product";
-import styles from "./styles.module.scss";
+import ProductCard from '@src/components/ProductCard';
+import { ProductCardContent } from '@src/types/product';
+import styles from './styles.module.scss';
 
 interface ProductContainerProps {
   title: string;
