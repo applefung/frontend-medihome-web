@@ -3,6 +3,11 @@ import Image from 'next/image';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import DoctorBasicInformation from '@src/components/DoctorBasicInformation';
 import ClinicDetail from '@src/components/ClinicDetail';
+import { useApiRequest } from '@src/utils/api';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { getDoctor } from '@src/services/doctor';
+import { Doctor } from '@src/types/doctor';
 import styles from './styles.module.scss';
 
 const basicInformation = [
@@ -17,6 +22,23 @@ const basicInformation = [
 ];
 
 const DoctorDetail = () => {
+  const { locale, query } = useRouter();
+  const [doctor, setDoctor] = useState<Doctor | null>(null);
+  const { submit } = useApiRequest(getDoctor);
+
+  const init = useCallback(async () => {
+    const id = query['id'] ? (query['id'] as string) : '';
+    const resp = await submit({ id });
+    if (resp?.status) {
+      setDoctor(resp.data ? (resp.data as Doctor) : null);
+    }
+    console.log('doctor', resp);
+  }, [submit, query]);
+
+  useEffect(() => {
+    init();
+  }, [init]);
+
   return (
     <div className={styles.container}>
       <LayoutWrapper>

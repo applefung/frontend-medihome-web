@@ -6,3 +6,10 @@ export interface ResponseSuccessType<T> {
 export type ResponseFailType = Record<'code' | 'message' | 'details', string>;
 
 export type DatabaseDates = Record<'createdAt' | 'updatedAt' | 'deletedAt', string>;
+
+type Locale = 'tc' | 'en';
+
+export type BilingualFormat = Record<Locale, string>;
+export type BilingualArrayFormat = Record<Locale, string[]>;
+
+export type ContactsFormat = Partial<Record<'email' | 'phone' | 'whatsapp', string[]>>;

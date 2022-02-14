@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 const { Search } = Input;
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }: Record<'onSearch', (value: string) => void>) => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
@@ -17,6 +17,7 @@ const SearchBar = () => {
           size="large"
           // loading
           className={styles.searchBar}
+          onSearch={onSearch}
         />
       </div>
     </div>
