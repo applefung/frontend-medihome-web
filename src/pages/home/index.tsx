@@ -4,12 +4,14 @@ import SearchBar from '@src/components/SearchBar';
 import CustomCarousel from '@src/components/CustomCarousel';
 import Section from '@src/components/Section';
 import DoctorFilter from '@src/components/DoctorFilter';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import ProductContainer from '@src/components/ProductContainer';
 import ArticleCardContainer from '@src/components/ArticleCardContainer';
 import { getCarousels } from '@src/services/carousel';
 import { CarouselBanners, CarouselType } from '@src/types/carousel';
 import { useApiRequest } from '@src/utils/api';
+import { useRouter } from 'next/router';
+import { DOCTORS } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
 const products = [
@@ -54,6 +56,7 @@ const products = [
 const Home: NextPage = () => {
   const [carousels, setCarousels] = useState<CarouselBanners>([]);
   const { submit } = useApiRequest(getCarousels);
+  const router = useRouter();
 
   const init = useCallback(async () => {
     const result = await submit();
@@ -67,12 +70,16 @@ const Home: NextPage = () => {
     init();
   }, [init]);
 
+  const handleSearch = (value: string) => {
+    router.push(`${DOCTORS}?search=${value.split(' ').join('_')}`);
+  };
+
   return (
     <div className={styles.container}>
       <LayoutWrapper>
         <>
           <Section>
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
           </Section>
           <Section>
             <CustomCarousel items={carousels} />
