@@ -17,7 +17,7 @@ const Doctors = () => {
   const homeTranslation = homeTranslations[locale as Locale];
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const { submit } = useApiRequest(getDoctors);
-  console.log('doctors', doctors);
+
   const specialties = [
     {
       content: 'anaesthesiology',
@@ -54,6 +54,7 @@ const Doctors = () => {
     if (resp?.status) {
       setDoctors(resp.data ? resp.data.data : []);
     }
+    console.log('resp', resp);
   }, [submit, query]);
 
   useEffect(() => {

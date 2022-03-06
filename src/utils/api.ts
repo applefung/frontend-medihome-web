@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 // import { useNavigate } from "react-router-dom";
 // import { setLoading } from "../store/actions/loading";
 // import { openModal } from "../store/actions/modal";
@@ -13,26 +13,67 @@ export const formatApiResponse = ({ data, status }: AxiosResponse<unknown>) => (
   status: Number(status >= 200 && status < 300),
 });
 
-export const useApiRequest = <T extends (...args: any) => Promise<ResponseSuccessType<unknown>>>(targetApiRequest: T) => {
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+// TODO: Type definition
+export const useApiRequest = <T extends (...args: any) => Promise<ResponseSuccessType<unknown>>>(targetApiRequest: T, onError?: () => void) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   const submit = useCallback(
     async (...args: Parameters<T>) => {
-      //   dispatch(setLoading(true));
+      setIsLoading(false);
       try {
         const resp = (await targetApiRequest(...args)) as ResponseSuccessType<InferResponseDataType<ReturnType<T>>>;
         return { error: null, ...resp };
       } catch (e: unknown) {
-        //   dispatch(openModal();
+        onError ? onError() : alert('I hv error1');
+        setError(e as Error);
       } finally {
-        //   dispatch(setLoading(false))
+        setIsLoading(true);
       }
     },
-    [targetApiRequest],
+    [targetApiRequest, onError],
   );
 
   return {
     submit,
+    isLoading,
+    error,
   };
 };
+
+// type CustomResp<U> = {
+//   error: Error | null;
+//   data: U | null;
+//   status: number;
+// }
+
+// TODO: Type definition
+// export const useApiRequest = <T, U>(targetApiRequest: T) => {
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [error, setError] = useState<Error | null>(null);
+
+//   const submit = useCallback(
+//     async (...args: Parameters<T>): Promise<CustomResp<U>> => {
+//       // const { onError, restParameters } = args[0];
+//       setIsLoading(false);
+//       try {
+//         const resp = (await targetApiRequest(restParameters));
+//         return { error: null, ...resp };
+//       } catch (e: unknown) {
+//         // eslint-disable-next-line no-unused-expressions
+//         // onError ? onError() : alert('I hv error');
+//         setError(e as Error);
+//         return { error: null, status: 0, data: null };
+//       } finally {
+//         setIsLoading(true);
+//       }
+//     },
+//     [targetApiRequest],
+//   );
+
+//   return {
+//     submit,
+//     isLoading,
+//     error,
+//   };
+// };

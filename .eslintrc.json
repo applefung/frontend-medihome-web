@@ -34,7 +34,8 @@
       }
    ],
    "no-param-reassign": "warn",
-   "object-curly-newline": "off"
+   "object-curly-newline": "off",
+   "no-unused-expressions":"warn"
   },
   "settings": {
     "import/resolver": {

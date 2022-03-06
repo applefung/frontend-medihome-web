@@ -131,20 +131,20 @@ const ClinicDetail = () => {
     <div className={styles.container}>
       <Tabs defaultActiveKey="0">
         {clinics.map(({ name, address, mtr, district, contacts, businessHours, timetables }, index) => (
-          <TabPane tab={district} key={index}>
+          <TabPane tab={district} key={name}>
             <div>
               <div>
                 <div>{name}</div>
                 <div>{address}</div>
                 <div>{mtr}</div>
                 {Object.entries(contacts).map(([key, contact]) => (
-                  <div key={index} className={styles.contactContainer}>
+                  <div key={key} className={styles.contactContainer}>
                     <div className={styles.contactKey}>{key}</div>
                     <div>{contact}</div>
                   </div>
                 ))}
                 {Object.entries(businessHours).map(([key, businessHour]) => (
-                  <div key={index} className={styles.businessHourContainer}>
+                  <div key={key} className={styles.businessHourContainer}>
                     <div className={styles.businessHourKey}>{key}</div>
                     <div>{businessHour}</div>
                   </div>
@@ -153,8 +153,8 @@ const ClinicDetail = () => {
               <Tabs defaultActiveKey="0">
                 {Object.entries(timetables).map(([key, { timeslots }]) => (
                   <TabPane tab={key} key={key}>
-                    {timeslots.map(({ from }, timeslotIndex) => (
-                      <Button key={timeslotIndex} className={styles.time}>
+                    {timeslots.map(({ from }) => (
+                      <Button key={key} className={styles.time}>
                         {from}
                       </Button>
                     ))}

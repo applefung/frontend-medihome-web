@@ -1,4 +1,3 @@
-import { CarouselType } from '@src/types/carousel';
 import { ResponseSuccessType } from '@src/types/common';
 import { Doctor } from '@src/types/doctor';
 import requestService from './request';
@@ -8,8 +7,20 @@ interface GetDoctorsResponse {
   count: number;
 }
 
-const getDoctors = ({ searchValue }: Record<'searchValue', string>) => {
-  return requestService.get<GetDoctorsResponse, ResponseSuccessType<GetDoctorsResponse>>(`/doctors?search=${searchValue}`);
+interface GetDoctorsParam {
+  searchValue?: string;
+}
+
+const getDoctors = ({ searchValue }: GetDoctorsParam) => {
+  const params = new URLSearchParams({
+    ...(searchValue && { search: searchValue }),
+  });
+  const url = `/doctors${searchValue ? `?${params.toString()}` : ''}`;
+  return requestService.get<GetDoctorsResponse, ResponseSuccessType<GetDoctorsResponse>>(url);
 };
 
-export { getDoctors };
+const getDoctor = ({ id }: Record<'id', string>) => {
+  return requestService.get<Doctor, ResponseSuccessType<Doctor>>(`/doctors/${id}`);
+};
+
+export { getDoctors, getDoctor };

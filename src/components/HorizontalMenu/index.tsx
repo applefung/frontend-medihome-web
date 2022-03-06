@@ -8,8 +8,8 @@ interface HorizontalMenuProps {
 const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
   return (
     <Menu>
-      {items.map(({ content, icon }, index) => (
-        <Menu.Item icon={icon} key={index}>
+      {items.map(({ content, icon }) => (
+        <Menu.Item icon={icon} key={content}>
           {content}
         </Menu.Item>
       ))}
