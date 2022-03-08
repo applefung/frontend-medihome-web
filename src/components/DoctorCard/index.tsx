@@ -14,7 +14,7 @@ const DoctorCard = () => {
       />
       <div className={styles.doctorContainer}>
         <div className={styles.doctorInfoContainer}>
-          <div>劉慶偉醫生 </div>
+          <div>劉慶偉醫生</div>
           <div>眼科</div>
           <div>Mong Kok</div>
         </div>
