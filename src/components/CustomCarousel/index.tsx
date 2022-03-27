@@ -1,4 +1,4 @@
-import { Carousel } from 'antd';
+// import { Carousel } from 'antd';
 import Image from 'next/image';
 import { imageLoader } from '@src/utils/imageLoader';
 import type { CarouselBanners } from '@src/types/carousel';
@@ -12,13 +12,13 @@ interface CustomCarouselProps {
 const CustomCarousel = ({ items, autoplay = false }: CustomCarouselProps) => {
   return (
     <div className={styles.container}>
-      <Carousel autoplay={autoplay}>
+      {/* <Carousel autoplay={autoplay}>
         {items.map(({ url }) => (
           <div key={url} className={styles.itemContainer}>
             <Image loader={imageLoader} src={url} alt="logo" width="800" height="450" />
           </div>
         ))}
-      </Carousel>
+      </Carousel> */}
     </div>
   );
 };

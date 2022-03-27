@@ -36,44 +36,5 @@ export const useApiRequest = <T extends (...args: any) => Promise<ResponseSucces
 
   return {
     submit,
-    isLoading,
-    error,
   };
 };
-
-// type CustomResp<U> = {
-//   error: Error | null;
-//   data: U | null;
-//   status: number;
-// }
-
-// TODO: Type definition
-// export const useApiRequest = <T, U>(targetApiRequest: T) => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState<Error | null>(null);
-
-//   const submit = useCallback(
-//     async (...args: Parameters<T>): Promise<CustomResp<U>> => {
-//       // const { onError, restParameters } = args[0];
-//       setIsLoading(false);
-//       try {
-//         const resp = (await targetApiRequest(restParameters));
-//         return { error: null, ...resp };
-//       } catch (e: unknown) {
-//         // eslint-disable-next-line no-unused-expressions
-//         // onError ? onError() : alert('I hv error');
-//         setError(e as Error);
-//         return { error: null, status: 0, data: null };
-//       } finally {
-//         setIsLoading(true);
-//       }
-//     },
-//     [targetApiRequest],
-//   );
-
-//   return {
-//     submit,
-//     isLoading,
-//     error,
-//   };
-// };

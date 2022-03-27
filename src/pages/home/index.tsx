@@ -64,7 +64,7 @@ const Home: NextPage = () => {
       url,
     }));
     setCarousels(carouselResults);
-  }, [submit]);
+  }, []);
 
   useEffect(() => {
     init();

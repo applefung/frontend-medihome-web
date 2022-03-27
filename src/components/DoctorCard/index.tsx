@@ -2,7 +2,14 @@ import { imageLoader } from '@src/utils/imageLoader';
 import Image from 'next/image';
 import styles from './styles.module.scss';
 
-const DoctorCard = () => {
+interface DoctorCardProps {
+  name: string;
+  specialty: string;
+  district: string[];
+  rating: number;
+}
+
+const DoctorCard = ({ name, specialty, district, rating }: DoctorCardProps) => {
   return (
     <div className={styles.container}>
       <Image
@@ -14,11 +21,11 @@ const DoctorCard = () => {
       />
       <div className={styles.doctorContainer}>
         <div className={styles.doctorInfoContainer}>
-          <div>劉慶偉醫生</div>
-          <div>眼科</div>
-          <div>Mong Kok</div>
+          <div>{name}</div>
+          <div>{specialty}</div>
+          <div>{district.join(',')}</div>
         </div>
-        <div className={styles.rating}>10.0</div>
+        <div className={styles.rating}>{rating}</div>
       </div>
     </div>
   );

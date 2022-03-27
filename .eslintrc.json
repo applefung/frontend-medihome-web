@@ -35,7 +35,9 @@
    ],
    "no-param-reassign": "warn",
    "object-curly-newline": "off",
-   "no-unused-expressions":"warn"
+   "no-unused-expressions":"warn",
+   "import/no-cycle": "warn",
+   "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "import/resolver": {

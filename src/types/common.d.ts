@@ -10,6 +10,5 @@ export type DatabaseDates = Record<'createdAt' | 'updatedAt' | 'deletedAt', stri
 type Locale = 'tc' | 'en';
 
 export type BilingualFormat = Record<Locale, string>;
-export type BilingualArrayFormat = Record<Locale, string[]>;
 
 export type ContactsFormat = Partial<Record<'email' | 'phone' | 'whatsapp', string[]>>;

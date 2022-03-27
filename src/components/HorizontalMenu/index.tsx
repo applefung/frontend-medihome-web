@@ -1,19 +1,23 @@
-import { MenuItem } from '@src/types/menu';
-import { Menu } from 'antd';
+import { MenuItemType } from '@src/types/menu';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
 
 interface HorizontalMenuProps {
-  items: MenuItem[];
+  items: MenuItemType[];
 }
 
 const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
   return (
-    <Menu>
-      {items.map(({ content, icon }) => (
-        <Menu.Item icon={icon} key={content}>
-          {content}
-        </Menu.Item>
+    <MenuList>
+      {items.map(({ content, icon }, index) => (
+        <MenuItem key={index}>
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText>{content}</ListItemText>
+        </MenuItem>
       ))}
-    </Menu>
+    </MenuList>
   );
 };
 

@@ -1,4 +1,5 @@
-import { DownOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import CustomDropdown from '@src/components/CustomDropdown';
 import DoctorCard from '@src/components/DoctorCard';
 import LayoutWrapper from '@src/components/LayoutWrapper';
@@ -9,7 +10,7 @@ import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/translations';
 import { useApiRequest } from '@src/utils/api';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 
 const Doctors = () => {
@@ -21,30 +22,30 @@ const Doctors = () => {
   const specialties = [
     {
       content: 'anaesthesiology',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
     {
       content: 'anatomicalPathology',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
     {
       content: 'cardiology',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
   ];
 
   const districts = [
     {
       content: 'Mong Kok',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
     {
       content: 'Kwun Tung',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
     {
       content: 'Ngau Tau Kok',
-      icon: <MedicineBoxOutlined />,
+      icon: <MedicalServicesOutlinedIcon />,
     },
   ];
 
@@ -54,8 +55,7 @@ const Doctors = () => {
     if (resp?.status) {
       setDoctors(resp.data ? resp.data.data : []);
     }
-    console.log('resp', resp);
-  }, [submit, query]);
+  }, []);
 
   useEffect(() => {
     init();
@@ -71,7 +71,7 @@ const Doctors = () => {
                 <CustomDropdown items={specialties}>
                   <div className={styles.dropdownInnerContainer}>
                     <div className={styles.dropdown}>{homeTranslation['specialty']}</div>
-                    <DownOutlined />
+                    <KeyboardArrowDownOutlinedIcon />
                   </div>
                 </CustomDropdown>
               </div>
@@ -79,7 +79,7 @@ const Doctors = () => {
                 <CustomDropdown items={districts}>
                   <div className={styles.dropdownInnerContainer}>
                     <div className={styles.dropdown}>{homeTranslation['district']}</div>
-                    <DownOutlined />
+                    <KeyboardArrowDownOutlinedIcon />
                   </div>
                 </CustomDropdown>
               </div>
@@ -88,12 +88,16 @@ const Doctors = () => {
           <Section>
             <div className={styles.doctorContainer}>
               <div className={styles.doctorInnerContainer}>
-                <DoctorCard />
-                <DoctorCard />
-                <DoctorCard />
-                <DoctorCard />
-                <DoctorCard />
-                <DoctorCard />
+                {doctors.map(({ name, specialty, clinics, rating }, index) => (
+                  <Fragment key={index}>
+                    <DoctorCard
+                      name={name['fullName'][locale as Locale]}
+                      specialty={specialty['name'][locale as Locale]}
+                      district={clinics.map(({ district }) => district['name'][locale as Locale])}
+                      rating={rating as number}
+                    />
+                  </Fragment>
+                ))}
               </div>
             </div>
           </Section>

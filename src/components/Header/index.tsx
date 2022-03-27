@@ -1,5 +1,7 @@
-import { Button } from 'antd';
-import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from '@ant-design/icons';
+import Button from '@mui/material/Button';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { homeTranslations } from '@src/translations/index';
 import type { Locale } from '@src/types/translations';
 import { useRouter } from 'next/router';
@@ -23,12 +25,12 @@ const Header = ({ isCollapsed = false, setIsCollapsed }: HeaderProps) => {
 
   return (
     <div className={styles.container}>
-      <Button onClick={() => setIsCollapsed(!isCollapsed)} className={styles.menuContainer}>
-        {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      <Button onClick={() => setIsCollapsed(!isCollapsed)} className={styles.menuContainer} variant="outlined">
+        {isCollapsed ? <MenuOutlinedIcon /> : <MenuOpenOutlinedIcon />}
       </Button>
       <div className={styles.rightContainer}>
         <div className={styles.signInContainer}>
-          <UserOutlined />
+          <AccountCircleOutlinedIcon />
           <div className={styles.signInInnerContainer}>
             <div className={styles.signIn}>{homeTranslation['signIn']}</div>
             <div>/</div>

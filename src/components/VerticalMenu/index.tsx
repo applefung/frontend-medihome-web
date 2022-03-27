@@ -1,36 +1,42 @@
-import { Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-
-const { SubMenu } = Menu;
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ContentCut from '@mui/icons-material/ContentCut';
+import ContentCopy from '@mui/icons-material/ContentCopy';
+import ContentPaste from '@mui/icons-material/ContentPaste';
+import Cloud from '@mui/icons-material/Cloud';
+import Divider from '@mui/material/Divider';
 
 const VerticalMenu = () => {
   return (
-    <Menu onClick={() => {}} style={{ width: 256 }} mode="vertical">
-      <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <Menu.ItemGroup title="Item 1">
-          <Menu.Item key="1">Option 1</Menu.Item>
-          <Menu.Item key="2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup title="Item 2">
-          <Menu.Item key="3">Option 3</Menu.Item>
-          <Menu.Item key="4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
-      </SubMenu>
-      <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <SubMenu key="sub3" title="Submenu">
-          <Menu.Item key="7">Option 7</Menu.Item>
-          <Menu.Item key="8">Option 8</Menu.Item>
-        </SubMenu>
-      </SubMenu>
-      <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-        <Menu.Item key="9">Option 9</Menu.Item>
-        <Menu.Item key="10">Option 10</Menu.Item>
-        <Menu.Item key="11">Option 11</Menu.Item>
-        <Menu.Item key="12">Option 12</Menu.Item>
-      </SubMenu>
-    </Menu>
+    <MenuList>
+      <MenuItem>
+        <ListItemIcon>
+          <ContentCut fontSize="small" />
+        </ListItemIcon>
+        <ListItemText>Cut</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ContentCopy fontSize="small" />
+        </ListItemIcon>
+        <ListItemText>Copy</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ContentPaste fontSize="small" />
+        </ListItemIcon>
+        <ListItemText>Paste</ListItemText>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <ListItemIcon>
+          <Cloud fontSize="small" />
+        </ListItemIcon>
+        <ListItemText>Web Clipboard</ListItemText>
+      </MenuItem>
+    </MenuList>
   );
 };
 

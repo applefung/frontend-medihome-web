@@ -33,7 +33,7 @@ const DoctorDetail = () => {
       setDoctor(resp.data ? (resp.data as Doctor) : null);
     }
     console.log('doctor', resp);
-  }, [submit, query]);
+  }, []);
 
   useEffect(() => {
     init();

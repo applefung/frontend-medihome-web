@@ -1,4 +1,7 @@
-import { Button, Tabs } from 'antd';
+import { SyntheticEvent, useState } from 'react';
+import Button from '@mui/material/Button';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import styles from './styles.module.scss';
 
 const clinics = [
@@ -124,45 +127,47 @@ const clinics = [
   },
 ];
 
-const { TabPane } = Tabs;
-
 const ClinicDetail = () => {
+  const [clinicTab, setClinicTab] = useState(0);
+  const [timeslotTab, setTimeslotTab] = useState(0);
+
   return (
     <div className={styles.container}>
-      <Tabs defaultActiveKey="0">
+      <Tabs value={clinicTab} onChange={(event: SyntheticEvent, newValue: number) => setClinicTab(newValue)}>
+        {clinics.map(({ district }, index) => (
+          <Tab label={district} key={index} />
+        ))}
         {clinics.map(({ name, address, mtr, district, contacts, businessHours, timetables }, index) => (
-          <TabPane tab={district} key={name}>
+          <div hidden={clinicTab !== index} key={index}>
             <div>
-              <div>
-                <div>{name}</div>
-                <div>{address}</div>
-                <div>{mtr}</div>
-                {Object.entries(contacts).map(([key, contact]) => (
-                  <div key={key} className={styles.contactContainer}>
-                    <div className={styles.contactKey}>{key}</div>
-                    <div>{contact}</div>
-                  </div>
-                ))}
-                {Object.entries(businessHours).map(([key, businessHour]) => (
-                  <div key={key} className={styles.businessHourContainer}>
-                    <div className={styles.businessHourKey}>{key}</div>
-                    <div>{businessHour}</div>
-                  </div>
-                ))}
-              </div>
-              <Tabs defaultActiveKey="0">
-                {Object.entries(timetables).map(([key, { timeslots }]) => (
-                  <TabPane tab={key} key={key}>
-                    {timeslots.map(({ from }) => (
-                      <Button key={key} className={styles.time}>
-                        {from}
-                      </Button>
-                    ))}
-                  </TabPane>
-                ))}
-              </Tabs>
+              <div>{name}</div>
+              <div>{address}</div>
+              <div>{mtr}</div>
+              {Object.entries(contacts).map(([key, contact]) => (
+                <div key={key} className={styles.contactContainer}>
+                  <div className={styles.contactKey}>{key}</div>
+                  <div>{contact}</div>
+                </div>
+              ))}
+              {Object.entries(businessHours).map(([key, businessHour]) => (
+                <div key={key} className={styles.businessHourContainer}>
+                  <div className={styles.businessHourKey}>{key}</div>
+                  <div>{businessHour}</div>
+                </div>
+              ))}
             </div>
-          </TabPane>
+            <Tabs value={timeslotTab} onChange={(event: SyntheticEvent, newValue: number) => setTimeslotTab(newValue)}>
+              {Object.entries(timetables).map(([key, { timeslots }], innerIndex) => (
+                <div hidden={timeslotTab !== innerIndex} key={innerIndex}>
+                  {timeslots.map(({ from }) => (
+                    <Button key={key} className={styles.time} variant="outlined">
+                      {from}
+                    </Button>
+                  ))}
+                </div>
+              ))}
+            </Tabs>
+          </div>
         ))}
       </Tabs>
     </div>
