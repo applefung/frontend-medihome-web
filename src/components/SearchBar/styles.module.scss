@@ -6,16 +6,12 @@
     align-items: center;
     width: 70%;
 
-    .logo {
-      flex: 2;
-    }
-
     .searchBar {
-      flex: 2;
-    }
-
-    .rightmost {
-      flex: 1;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid $border-color;
+      padding: 5px 10px;
+      border-radius: 5px;
     }
   }
 }
