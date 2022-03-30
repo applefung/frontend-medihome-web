@@ -68,20 +68,20 @@ const Doctors = () => {
           <Section>
             <div className={styles.dropdownOuterContainer}>
               <div className={styles.dropdownContainer}>
-                <CustomDropdown items={specialties}>
+                {/* <CustomDropdown items={specialties}>
                   <div className={styles.dropdownInnerContainer}>
                     <div className={styles.dropdown}>{homeTranslation['specialty']}</div>
                     <KeyboardArrowDownOutlinedIcon />
                   </div>
-                </CustomDropdown>
+                </CustomDropdown> */}
               </div>
               <div className={styles.dropdownContainer}>
-                <CustomDropdown items={districts}>
+                {/* <CustomDropdown items={districts}>
                   <div className={styles.dropdownInnerContainer}>
                     <div className={styles.dropdown}>{homeTranslation['district']}</div>
                     <KeyboardArrowDownOutlinedIcon />
                   </div>
-                </CustomDropdown>
+                </CustomDropdown> */}
               </div>
             </div>
           </Section>
