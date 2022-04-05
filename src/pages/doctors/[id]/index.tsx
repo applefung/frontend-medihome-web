@@ -32,7 +32,6 @@ const DoctorDetail = () => {
     if (resp?.status) {
       setDoctor(resp.data ? (resp.data as Doctor) : null);
     }
-    console.log('doctor', resp);
   }, []);
 
   useEffect(() => {
@@ -44,16 +43,18 @@ const DoctorDetail = () => {
       <LayoutWrapper>
         <>
           <div className={styles.doctorContainer}>
-            <Image
-              loader={imageLoader}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk8tDGShb27R7tW8DO25UZDNtJ7K6DX6dLVw&usqp=CAU"
-              alt="Doctor Detail"
-              width="100"
-              height="100"
-            />
-            <div>
-              <div>何存廣醫生</div>
-              <div>眼科</div>
+            <div className={styles.doctorInnerContainer}>
+              <Image
+                loader={imageLoader}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk8tDGShb27R7tW8DO25UZDNtJ7K6DX6dLVw&usqp=CAU"
+                alt="Doctor Detail"
+                width="100"
+                height="100"
+              />
+              <div>
+                <div>何存廣醫生</div>
+                <div>眼科</div>
+              </div>
             </div>
           </div>
           <div className={styles.doctorDetailContainer}>

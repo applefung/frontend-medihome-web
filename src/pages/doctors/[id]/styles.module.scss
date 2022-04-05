@@ -2,6 +2,15 @@
   .doctorContainer {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+
+    .doctorInnerContainer {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $primary-color;
+    }
   }
 
   .doctorDetailContainer {

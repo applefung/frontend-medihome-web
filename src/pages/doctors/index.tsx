@@ -5,17 +5,20 @@ import DoctorCard from '@src/components/DoctorCard';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import Section from '@src/components/Section';
 import { getDoctors } from '@src/services/doctor';
-import { homeTranslations } from '@src/translations';
+import { doctorsTranslations, homeTranslations } from '@src/translations';
 import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/translations';
 import { useApiRequest } from '@src/utils/api';
 import { useRouter } from 'next/router';
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import { DOCTORS } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
 const Doctors = () => {
-  const { locale, query } = useRouter();
+  const router = useRouter();
+  const { locale, query } = router;
   const homeTranslation = homeTranslations[locale as Locale];
+  const doctorsTranslation = doctorsTranslations[locale as Locale];
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const { submit } = useApiRequest(getDoctors);
 
@@ -88,16 +91,21 @@ const Doctors = () => {
           <Section>
             <div className={styles.doctorContainer}>
               <div className={styles.doctorInnerContainer}>
-                {doctors.map(({ name, specialty, clinics, rating }, index) => (
-                  <Fragment key={index}>
-                    <DoctorCard
-                      name={name['fullName'][locale as Locale]}
-                      specialty={specialty['name'][locale as Locale]}
-                      district={clinics.map(({ district }) => district['name'][locale as Locale])}
-                      rating={rating as number}
-                    />
-                  </Fragment>
-                ))}
+                {doctors.length ? (
+                  doctors.map(({ name, specialty, clinics, rating, id }, index) => (
+                    <Fragment key={index}>
+                      <DoctorCard
+                        name={name['fullName'][locale as Locale]}
+                        specialty={specialty['name'][locale as Locale]}
+                        district={clinics.map(({ district }) => district['name'][locale as Locale])}
+                        rating={rating as number}
+                        detailLink={`${DOCTORS}/${id}`}
+                      />
+                    </Fragment>
+                  ))
+                ) : (
+                  <div>{doctorsTranslation['noData']}</div>
+                )}
               </div>
             </div>
           </Section>

@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { homeTranslations } from '@src/translations/index';
+import { homeTranslations } from '@src/translations';
 import type { Locale } from '@src/types/translations';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';

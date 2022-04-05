@@ -1,14 +1,28 @@
 import Card from '@mui/material/Card';
-import Image from 'next/image';
-import { imageLoader } from '@src/utils/imageLoader';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 import { ProductCardContent } from '@src/types/product';
+import styles from './styles.module.scss';
 
 const ProductCard = ({ image, title, description }: ProductCardContent) => {
   return (
-    // <Card style={{ width: 300 }} cover={<Image loader={imageLoader} alt="product card" src={image} width="300" height="182" />}>
-    //   <Meta title={title} description={description} />
-    // </Card>
-    <div>ProductCard</div>
+    <div className={styles.container}>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia component="img" height="140" image={image} alt="green iguana" className={styles.imageContainer} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </div>
   );
 };
 

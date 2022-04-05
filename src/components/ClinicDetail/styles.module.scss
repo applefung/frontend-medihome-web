@@ -1,19 +1,56 @@
 .container {
-  .contactContainer {
-    display: flex;
-    .contactKey {
-      margin-right: 10px;
-    }
-  }
+  margin: 20px 0;
 
-  .businessHourContainer {
-    display: flex;
-    .businessHourKey {
-      margin-right: 10px;
-    }
-  }
+  .innerContainer {
+    padding: 10px 20px;
 
-  .time {
-    margin: 10px 10px 10px 0px;
+    .contentContainer {
+      display: flex;
+      align-items: center;
+      margin: 10px 0px;
+
+      .content {
+        margin-left: 10px;
+      }
+    }
+
+    .contactOutterContainer {
+      display: flex;
+      align-items: center;
+      margin: 10px 0px;
+
+      .contactContainer {
+        margin-left: 10px;
+
+        .contactInnerContainer {
+          display: flex;
+
+          .contactKey {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .businessHourOutterContainer {
+      display: flex;
+      align-items: center;
+      margin: 10px 0px;
+
+      .businessHourContainer {
+        margin-left: 10px;
+
+        .businessHourInnerContainer {
+          display: flex;
+          .businessHourKey {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .time {
+      margin: 10px 10px 10px 0px;
+    }
   }
 }

@@ -2,17 +2,50 @@
   display: flex;
   border: 1px solid $primary-color;
   align-items: center;
+  margin: 10px 0;
 
   .doctorContainer {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
 
     .doctorInfoContainer {
-      // flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        font-weight: bold;
+        font-size: 18px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .specialty {
+        font-size: 14px;
+        margin: 5px 0;
+        color: $primary-color;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .district {
+        font-size: 14px;
+        color: $primary-color;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     .rating {
-      flex: 1;
       color: $deep-yellow;
+      margin: 0 20px;
+      font-weight: bold;
     }
   }
 }

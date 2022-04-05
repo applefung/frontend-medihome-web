@@ -20,8 +20,10 @@ const CustomDropdown = ({ items, label, onChange }: CustomDropdownProps) => {
         <Select labelId="select-label" label={label} onChange={onChange}>
           {items.map(({ content, icon, key }, index) => (
             <MenuItem key={index} value={key}>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText>{content}</ListItemText>
+              <div className={styles.menuItemContainer}>
+                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                <ListItemText>{content}</ListItemText>
+              </div>
             </MenuItem>
           ))}
         </Select>
