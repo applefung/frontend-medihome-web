@@ -13,6 +13,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Paper from '@mui/material/Paper';
+import { Clinic } from '@src/types/clinic';
+import { useRouter } from 'next/router';
+import { Locale } from '@src/types/common';
 import styles from './styles.module.scss';
 
 const clinics = [
@@ -73,7 +76,7 @@ const clinics = [
   },
   {
     id: 'dsad',
-    name: 'Health Integrated Medical and Skin Laser Centre2',
+    name: 'Health Centre2',
     address: 'Rm 1401, 14/F, Chinachem Cameron Centre, 42 Cameron Road, Tsim Sha Tsui2',
     mtr: 'Tsim Sha Tsui Exit B2',
     district: 'Shanm Shui Po',
@@ -138,7 +141,8 @@ const clinics = [
   },
 ];
 
-const ClinicDetail = () => {
+const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
+  const { locale } = useRouter();
   const [clinicTab, setClinicTab] = useState(0);
   const [timeslotTab, setTimeslotTab] = useState(0);
 
@@ -147,29 +151,31 @@ const ClinicDetail = () => {
       <Paper elevation={3} className={styles.innerContainer}>
         <Tabs value={clinicTab} onChange={(event: SyntheticEvent, newValue: number) => setClinicTab(newValue)}>
           {clinics.map(({ district }, index) => (
-            <Tab label={district} key={index} />
+            <Tab label={district['name'][locale as Locale]} key={`clinic-tabs-${index}`} />
           ))}
         </Tabs>
-        {clinics.map(({ name, address, mtr, district, contacts, businessHours, timetables }, index) => (
-          <div hidden={clinicTab !== index} key={index}>
+        {clinics.map(({ name, address, district, mtr, contacts, businessHours, reservationTime }, index) => (
+          <div hidden={clinicTab !== index} key={`clinic-tab-${index}`}>
             <div>
               <div className={styles.contentContainer}>
                 <div>
                   <HomeIcon />
                 </div>
-                <div className={styles.content}>{name}</div>
+                <div className={styles.content}>{name[locale as Locale]}</div>
               </div>
               <div className={styles.contentContainer}>
                 <div>
                   <MapIcon />
                 </div>
-                <div className={styles.content}>{address}</div>
+                <div className={styles.content}>{address['name'][locale as Locale]}</div>
               </div>
               <div className={styles.contentContainer}>
                 <div>
                   <DirectionsSubwayIcon />
                 </div>
-                <div className={styles.content}>{mtr}</div>
+                <div className={styles.content}>
+                  {mtr['station']} {mtr['exit']}
+                </div>
               </div>
               <div className={styles.contactOutterContainer}>
                 <div>
@@ -194,10 +200,10 @@ const ClinicDetail = () => {
                       <Typography>Business Hours</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      {Object.entries(businessHours).map(([key, businessHour]) => (
-                        <div key={key} className={styles.businessHourInnerContainer}>
+                      {Object.entries(businessHours).map(([key, businessHours]) => (
+                        <div key={`clinic-hours-${key}`} className={styles.businessHourInnerContainer}>
                           <div className={styles.businessHourKey}>{key}</div>
-                          <div>{businessHour}</div>
+                          <div>{businessHours.map(({ fromTime, toTime }) => `${fromTime}-${toTime}`).join(' ')}</div>
                         </div>
                       ))}
                     </AccordionDetails>
@@ -205,20 +211,23 @@ const ClinicDetail = () => {
                 </div>
               </div>
             </div>
-            <Tabs value={timeslotTab} onChange={(event: SyntheticEvent, newValue: number) => setTimeslotTab(newValue)}>
-              {Object.keys(timetables).map((key) => (
-                <Tab label={key} key={index} />
-              ))}
-            </Tabs>
-            {Object.entries(timetables).map(([key, { timeslots }], innerIndex) => (
-              <div hidden={timeslotTab !== innerIndex} key={innerIndex}>
-                {timeslots.map(({ from }) => (
-                  <Button key={key} className={styles.time} variant="outlined">
-                    {from}
-                  </Button>
+            {reservationTime && (
+              <Tabs value={timeslotTab} onChange={(event: SyntheticEvent, newValue: number) => setTimeslotTab(newValue)}>
+                {Object.keys(reservationTime).map((key) => (
+                  <Tab label={key} key={`business-hour-tab-${key}`} />
                 ))}
-              </div>
-            ))}
+              </Tabs>
+            )}
+            {reservationTime &&
+              Object.entries(reservationTime).map(([key, { timeslots }], innerIndex) => (
+                <div hidden={timeslotTab !== innerIndex} key={`business-hour-tab-${innerIndex}`}>
+                  {timeslots.map(({ fromTime }) => (
+                    <Button key={`timeslot-${fromTime}-${district}`} className={styles.time} variant="outlined">
+                      {fromTime}
+                    </Button>
+                  ))}
+                </div>
+              ))}
           </div>
         ))}
       </Paper>

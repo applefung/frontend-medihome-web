@@ -1,7 +1,11 @@
 import styles from './styles.module.scss';
 
+interface ItemType {
+  title: string;
+  description: string[];
+}
 interface BasicInformationProps {
-  items: Record<'title' | 'description', string>[];
+  items: ItemType[];
 }
 
 const DoctorBasicInformation = ({ items }: BasicInformationProps) => {
@@ -10,7 +14,9 @@ const DoctorBasicInformation = ({ items }: BasicInformationProps) => {
       {items.map(({ title, description }) => (
         <div key={title} className={styles.innerContainer}>
           <h3>{title}</h3>
-          <div>{description}</div>
+          {description.map((item) => (
+            <div>{item}</div>
+          ))}
         </div>
       ))}
     </div>

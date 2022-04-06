@@ -37,7 +37,9 @@
    "object-curly-newline": "off",
    "no-unused-expressions":"warn",
    "import/no-cycle": "warn",
-   "react-hooks/exhaustive-deps": "warn"
+   "react-hooks/exhaustive-deps": "warn",
+   "react/jsx-one-expression-per-line": "warn",
+   "operator-linebreak": "warn"
   },
   "settings": {
     "import/resolver": {
