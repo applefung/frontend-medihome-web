@@ -11,10 +11,12 @@ import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/common';
 import { LANGUAGES } from '@src/utils/constants/common';
 import { doctorsTranslations } from '@src/translations';
+import { NOT_FOUND } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
 const DoctorDetail = () => {
-  const { locale, query } = useRouter();
+  const router = useRouter();
+  const { locale, query } = router;
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const doctorsTranslation = doctorsTranslations[locale as Locale];
   const basicInformation = useMemo(() => {
@@ -42,6 +44,10 @@ const DoctorDetail = () => {
     if (id.length) {
       const resp = await submit({ id });
       if (resp?.status) {
+        if (resp.data && !Object.keys(resp.data).length) {
+          router.push(NOT_FOUND);
+          return;
+        }
         setDoctor(resp.data ? (resp.data as Doctor) : null);
       }
     }

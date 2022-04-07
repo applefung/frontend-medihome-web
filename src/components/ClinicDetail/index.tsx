@@ -16,6 +16,8 @@ import Paper from '@mui/material/Paper';
 import { Clinic } from '@src/types/clinic';
 import { useRouter } from 'next/router';
 import { Locale } from '@src/types/common';
+import { CONTACTS, DAYS, MTRS } from '@src/utils/constants/common';
+import { clinicsTranslations } from '@src/translations';
 import styles from './styles.module.scss';
 
 const clinics = [
@@ -143,6 +145,7 @@ const clinics = [
 
 const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
   const { locale } = useRouter();
+  const clinicsTranslation = clinicsTranslations[locale as Locale];
   const [clinicTab, setClinicTab] = useState(0);
   const [timeslotTab, setTimeslotTab] = useState(0);
 
@@ -174,7 +177,20 @@ const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
                   <DirectionsSubwayIcon />
                 </div>
                 <div className={styles.content}>
-                  {mtr['station']} {mtr['exit']}
+                  <div className={styles.mtrContainer}>
+                    <div>
+                      {clinicsTranslation['station']}
+                      :&nbsp;
+                    </div>
+                    <div>{MTRS[mtr['station'] as keyof typeof MTRS][locale as Locale]}</div>
+                  </div>
+                  <div className={styles.mtrContainer}>
+                    <div>
+                      {clinicsTranslation['exit']}
+                      :&nbsp;
+                    </div>
+                    <div>{mtr['exit']}</div>
+                  </div>
                 </div>
               </div>
               <div className={styles.contactOutterContainer}>
@@ -184,8 +200,15 @@ const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
                 <div className={styles.contactContainer}>
                   {Object.entries(contacts).map(([key, contact]) => (
                     <div key={key} className={styles.contactInnerContainer}>
-                      <div className={styles.contactKey}>{key}</div>
-                      <div>{contact}</div>
+                      <div>
+                        {CONTACTS[key as keyof typeof CONTACTS][locale as Locale]}
+                        :&nbsp;
+                      </div>
+                      <div>
+                        {contact.map((item) => (
+                          <div key={item}>{item}</div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -197,13 +220,19 @@ const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
                 <div className={styles.businessHourContainer}>
                   <Accordion elevation={0}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                      <Typography>Business Hours</Typography>
+                      <Typography>{clinicsTranslation['businessHours']}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       {Object.entries(businessHours).map(([key, businessHours]) => (
                         <div key={`clinic-hours-${key}`} className={styles.businessHourInnerContainer}>
-                          <div className={styles.businessHourKey}>{key}</div>
-                          <div>{businessHours.map(({ fromTime, toTime }) => `${fromTime}-${toTime}`).join(' ')}</div>
+                          <div className={styles.businessHourKey}>{DAYS[key as keyof typeof DAYS][locale as Locale]}</div>
+                          <div>
+                            {businessHours.map(({ fromTime, toTime }) => (
+                              <div>
+                                {fromTime}-{toTime}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       ))}
                     </AccordionDetails>
