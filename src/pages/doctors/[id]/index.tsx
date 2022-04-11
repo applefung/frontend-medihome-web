@@ -1,3 +1,5 @@
+import { GetServerSidePropsContext, PreviewData } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 import { imageLoader } from '@src/utils/imageLoader';
 import Image from 'next/image';
 import LayoutWrapper from '@src/components/LayoutWrapper';
@@ -6,7 +8,7 @@ import ClinicDetail from '@src/components/ClinicDetail';
 import { useApiRequest } from '@src/utils/api';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getDoctor } from '@src/services/doctor';
+import { getDoctor, getDoctorIds } from '@src/services/doctor';
 import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/common';
 import { LANGUAGES } from '@src/utils/constants/common';
@@ -14,10 +16,37 @@ import { doctorsTranslations } from '@src/translations';
 import { NOT_FOUND } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
-const DoctorDetail = () => {
+export const getStaticPaths = async () => {
+  const resp = await getDoctorIds();
+  if (resp.status) {
+    const paths = (resp.data ?? []).map(({ id }) => ({
+      params: { id },
+    }));
+    return { paths, fallback: false };
+  }
+};
+
+export const getStaticProps = async ({ params }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+  const id = params?.id ?? '';
+  const resp = await getDoctor({ id: id as string });
+  if (resp.status) {
+    if (!resp.data) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: { doctor: resp.data },
+    };
+  }
+  return {
+    notFound: true,
+  };
+};
+
+const DoctorDetail = ({ doctor }: Record<'doctor', Doctor | null>) => {
   const router = useRouter();
-  const { locale, query } = router;
-  const [doctor, setDoctor] = useState<Doctor | null>(null);
+  const { locale } = router;
   const doctorsTranslation = doctorsTranslations[locale as Locale];
   const basicInformation = useMemo(() => {
     if (!doctor) {
@@ -36,26 +65,6 @@ const DoctorDetail = () => {
         : []),
     ];
   }, [doctor]);
-
-  const { submit } = useApiRequest(getDoctor);
-
-  const init = useCallback(async () => {
-    const id = query['id'] ? (query['id'] as string) : '';
-    if (id.length) {
-      const resp = await submit({ id });
-      if (resp?.status) {
-        if (resp.data && !Object.keys(resp.data).length) {
-          router.push(NOT_FOUND);
-          return;
-        }
-        setDoctor(resp.data ? (resp.data as Doctor) : null);
-      }
-    }
-  }, [query]);
-
-  useEffect(() => {
-    init();
-  }, [init]);
 
   return (
     <div className={styles.container}>

@@ -1,68 +1,36 @@
-import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import { GetServerSideProps, GetServerSidePropsContext, PreviewData } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 import CustomDropdown from '@src/components/CustomDropdown';
 import DoctorCard from '@src/components/DoctorCard';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import Section from '@src/components/Section';
 import { getDoctors } from '@src/services/doctor';
-import { doctorsTranslations, homeTranslations } from '@src/translations';
+import { doctorsTranslations } from '@src/translations';
 import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/translations';
-import { useApiRequest } from '@src/utils/api';
 import { useRouter } from 'next/router';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { DOCTORS } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
-const Doctors = () => {
+type DoctorsProps = Record<'doctors', Doctor[]>;
+
+export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+  const searchValue = query['search'] ? (query['search'] as string).split('_').join(' ') : '';
+  const resp = await getDoctors({ searchValue });
+  if (resp.status) {
+    const data = resp.data ? resp.data.data : [];
+    return {
+      props: { doctors: data },
+    };
+  }
+  return { props: { doctors: [] } };
+};
+
+const Doctors = ({ doctors }: DoctorsProps) => {
   const router = useRouter();
-  const { locale, query } = router;
-  const homeTranslation = homeTranslations[locale as Locale];
+  const { locale } = router;
   const doctorsTranslation = doctorsTranslations[locale as Locale];
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const { submit } = useApiRequest(getDoctors);
-
-  const specialties = [
-    {
-      content: 'anaesthesiology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'anatomicalPathology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'cardiology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-  ];
-
-  const districts = [
-    {
-      content: 'Mong Kok',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'Kwun Tung',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'Ngau Tau Kok',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-  ];
-
-  const init = useCallback(async () => {
-    const searchValue = query['search'] ? (query['search'] as string).split('_').join(' ') : '';
-    const resp = await submit({ searchValue });
-    if (resp?.status) {
-      setDoctors(resp.data ? resp.data.data : []);
-    }
-  }, []);
-
-  useEffect(() => {
-    init();
-  }, [init]);
 
   return (
     <div className={styles.container}>

@@ -1,6 +1,10 @@
 .container {
   .itemContainer {
-    display: flex !important;
+    display: flex;
     justify-content: center;
+    .images {
+      height: 450px;
+      object-fit: contain;
+    }
   }
 }

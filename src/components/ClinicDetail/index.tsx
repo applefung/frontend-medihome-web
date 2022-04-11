@@ -228,7 +228,7 @@ const ClinicDetail = ({ clinics }: Record<'clinics', Clinic[]>) => {
                           <div className={styles.businessHourKey}>{DAYS[key as keyof typeof DAYS][locale as Locale]}</div>
                           <div>
                             {businessHours.map(({ fromTime, toTime }) => (
-                              <div>
+                              <div key={fromTime}>
                                 {fromTime}-{toTime}
                               </div>
                             ))}

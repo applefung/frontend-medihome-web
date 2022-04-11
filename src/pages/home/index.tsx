@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, NextPage } from 'next';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import SearchBar from '@src/components/SearchBar';
 import CustomCarousel from '@src/components/CustomCarousel';
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
             <SearchBar onSearch={handleSearch} />
           </Section>
           <Section>
-            <CustomCarousel items={carousels} />
+            <CustomCarousel items={carousels} autoplay />
           </Section>
           <Section>
             <DoctorFilter />

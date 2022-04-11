@@ -15,7 +15,7 @@ const DoctorBasicInformation = ({ items }: BasicInformationProps) => {
         <div key={title} className={styles.innerContainer}>
           <h3>{title}</h3>
           {description.map((item) => (
-            <div>{item}</div>
+            <div key={item}>{item}</div>
           ))}
         </div>
       ))}
