@@ -16,7 +16,6 @@ interface DoctorCardProps {
 const DoctorCard = ({ name, specialty, district, rating, detailLink }: DoctorCardProps) => {
   const { locale } = useRouter();
   const doctorsTranslation = doctorsTranslations[locale as Locale];
-  console.log('name', name);
   return (
     <div className={styles.container}>
       <Image
