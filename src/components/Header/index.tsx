@@ -14,13 +14,12 @@ interface HeaderProps {
 
 const Header = ({ isCollapsed = false, setIsCollapsed }: HeaderProps) => {
   const router = useRouter();
-  const { locale, pathname } = router;
+  const { locale, asPath } = router;
   const homeTranslation = homeTranslations[locale as Locale];
 
   const changeLanguage = (locale: Locale) => {
     const toLocale = { locale };
-
-    router.push(pathname, pathname, toLocale);
+    router.push(asPath, asPath, toLocale);
   };
 
   return (
