@@ -39,7 +39,8 @@
    "import/no-cycle": "warn",
    "react-hooks/exhaustive-deps": "warn",
    "react/jsx-one-expression-per-line": "warn",
-   "operator-linebreak": "warn"
+   "operator-linebreak": "warn",
+   "implicit-arrow-linebreak": "warn"
   },
   "settings": {
     "import/resolver": {

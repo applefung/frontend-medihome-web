@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
     const paths = (resp.data ?? []).map(({ id }) => ({
       params: { id },
     }));
-    return { paths, fallback: false };
+    return { paths, fallback: 'blocking' };
   }
 };
 
@@ -37,6 +37,7 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext<Parse
     }
     return {
       props: { doctor: resp.data },
+      revalidate: 10,
     };
   }
   return {

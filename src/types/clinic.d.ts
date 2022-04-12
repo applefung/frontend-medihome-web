@@ -1,7 +1,7 @@
 import { BilingualFormat } from './common';
 import { Doctor } from './doctor';
 
-interface District {
+export interface District {
   id: string;
   name: BilingualFormat;
   createdAt: string;

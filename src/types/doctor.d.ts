@@ -2,7 +2,7 @@ import { Clinic } from './clinic';
 import { CommentType } from './comment';
 import { BilingualFormat, ContactsFormat } from './common';
 
-interface Specialty {
+export interface Specialty {
   id: string;
   name: BilingualFormat;
   createdAt: string;

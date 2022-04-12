@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
 import CustomDropdown from '@src/components/CustomDropdown';
@@ -6,49 +6,39 @@ import { homeTranslations } from '@src/translations';
 import { Locale } from '@src/types/translations';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
+import { useApiRequest } from '@src/utils/api';
+import { getSpecialties } from '@src/services/specialty';
+import { getDistricts } from '@src/services/district';
+import type { Specialty } from '@src/types/doctor';
+import type { District } from '@src/types/clinic';
+import type { DropdownItemType } from '@src/types/menu';
 import styles from './styles.module.scss';
 
 const DoctorFilter = () => {
   const { locale } = useRouter();
   const homeTranslation = homeTranslations[locale as Locale];
+  const [specialties, setSpecialties] = useState<DropdownItemType[]>([]);
+  const [districts, setDistricts] = useState<DropdownItemType[]>([]);
   const currrentSpecialty = useRef('');
   const currrentDistrict = useRef('');
+  const { submit: getSpecialtiesApi } = useApiRequest(getSpecialties);
+  const { submit: getDistrictsApi } = useApiRequest(getDistricts);
 
-  const specialties = [
-    {
-      content: 'anaesthesiology',
-      key: 'anaesthesiology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'anatomicalPathology',
-      key: 'anatomicalPathology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'cardiology',
-      key: 'cardiology',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-  ];
+  const formatDropdownData = (data: Specialty[] | District[]) => data.map(({ name }) => ({ content: name[locale as Locale], key: name['en'] }));
 
-  const districts = [
-    {
-      content: 'Mong Kok',
-      key: 'mongKok',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'Kwun Tung',
-      key: 'kwunTung',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-    {
-      content: 'Ngau Tau Kok',
-      key: 'ngauTauKok',
-      icon: <MedicalServicesOutlinedIcon />,
-    },
-  ];
+  const init = async () => {
+    const resp = await Promise.allSettled([getSpecialtiesApi(), getDistrictsApi()]);
+    if (resp[0].status === 'fulfilled') {
+      setSpecialties(formatDropdownData(resp[0]?.value?.data ?? []));
+    }
+    if (resp[1].status === 'fulfilled') {
+      setDistricts(formatDropdownData(resp[1]?.value?.data ?? []));
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, [locale]);
 
   const handleSearch = useCallback(() => {
     console.log('currrentSpecialty: ', currrentSpecialty.current);
