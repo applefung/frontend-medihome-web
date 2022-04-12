@@ -18,7 +18,6 @@ type DoctorsProps = Record<'doctors', Doctor[]>;
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
   const searchValue = query['search'] ? (query['search'] as string).split('_').join(' ') : '';
   const resp = await getDoctors({ searchValue });
-  console.log('here', resp);
   if (resp.status) {
     const data = resp.data ? resp.data.data : [];
     return {
@@ -29,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
 };
 
 const Doctors = ({ doctors }: DoctorsProps) => {
-  console.log('doctors', doctors);
   const router = useRouter();
   const { locale } = router;
   const doctorsTranslation = doctorsTranslations[locale as Locale];
