@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
     params = `search=${searchValue}`;
   }
   if (specialtyId) {
-    params = `${params ? '&' : ''}districtId=${specialtyId}`;
+    params = `${params ? '&' : ''}specialtyId=${specialtyId}`;
   }
   if (districtId) {
     params = `${params ? '&' : ''}districtId=${districtId}`;

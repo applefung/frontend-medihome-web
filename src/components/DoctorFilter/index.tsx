@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
 import CustomDropdown from '@src/components/CustomDropdown';
-import { homeTranslations } from '@src/translations';
+import { commonsTranslations, homeTranslations } from '@src/translations';
 import { Locale } from '@src/types/translations';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
@@ -20,6 +20,7 @@ const DoctorFilter = () => {
   const router = useRouter();
   const { locale } = router;
   const homeTranslation = homeTranslations[locale as Locale];
+  const commonsTranslation = commonsTranslations[locale as Locale];
   const [specialties, setSpecialties] = useState<DropdownItemType[]>([]);
   const [districts, setDistricts] = useState<DropdownItemType[]>([]);
   const currrentSpecialty = useRef('');
@@ -32,10 +33,10 @@ const DoctorFilter = () => {
   const init = async () => {
     const resp = await Promise.allSettled([getSpecialtiesApi(), getDistrictsApi()]);
     if (resp[0].status === 'fulfilled') {
-      setSpecialties(formatDropdownData(resp[0]?.value?.data ?? []));
+      setSpecialties([{ content: commonsTranslation['all'], key: 'all' }, ...formatDropdownData(resp[0]?.value?.data ?? [])]);
     }
     if (resp[1].status === 'fulfilled') {
-      setDistricts(formatDropdownData(resp[1]?.value?.data ?? []));
+      setDistricts([{ content: commonsTranslation['all'], key: 'all' }, ...formatDropdownData(resp[1]?.value?.data ?? [])]);
     }
   };
 
@@ -45,13 +46,13 @@ const DoctorFilter = () => {
 
   const handleSearch = useCallback(async () => {
     let params = '';
-    if (currrentSpecialty.current) {
+    if (currrentSpecialty.current && currrentSpecialty.current !== 'all') {
       params = `specialty=${currrentSpecialty.current}`;
     }
-    if (currrentDistrict.current) {
+    if (currrentDistrict.current && currrentDistrict.current !== 'all') {
       params = `${params ? `${params}&` : ''}district=${currrentDistrict.current}`;
     }
-    router.push(`${DOCTORS}?${params}`);
+    router.push(`${DOCTORS}${params ? `?${params}` : ''}`);
   }, []);
 
   return (
