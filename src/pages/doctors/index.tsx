@@ -17,7 +17,19 @@ type DoctorsProps = Record<'doctors', Doctor[]>;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
   const searchValue = query['search'] ? (query['search'] as string).split('_').join(' ') : '';
-  const resp = await getDoctors({ searchValue });
+  const specialtyId = query['specialty'];
+  const districtId = query['district'];
+  let params = '';
+  if (searchValue) {
+    params = `search=${searchValue}`;
+  }
+  if (specialtyId) {
+    params = `${params ? '&' : ''}districtId=${specialtyId}`;
+  }
+  if (districtId) {
+    params = `${params ? '&' : ''}districtId=${districtId}`;
+  }
+  const resp = await getDoctors(params);
   if (resp.status) {
     const data = resp.data ? resp.data.data : [];
     return {

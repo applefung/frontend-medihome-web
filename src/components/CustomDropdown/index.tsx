@@ -17,7 +17,7 @@ const CustomDropdown = ({ items, label, onChange }: CustomDropdownProps) => {
     <div className={styles.container}>
       <FormControl fullWidth>
         <InputLabel id="select-label">{label}</InputLabel>
-        <Select labelId="select-label" label={label} onChange={onChange}>
+        <Select labelId="select-label" label={label} onChange={onChange} defaultValue="">
           {items.map(({ content, icon, key }, index) => (
             <MenuItem key={index} value={key}>
               <div className={styles.menuItemContainer}>

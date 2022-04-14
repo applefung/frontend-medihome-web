@@ -9,13 +9,16 @@ import { useRouter } from 'next/router';
 import { useApiRequest } from '@src/utils/api';
 import { getSpecialties } from '@src/services/specialty';
 import { getDistricts } from '@src/services/district';
+import { getDoctors } from '@src/services/doctor';
+import { DOCTORS } from '@src/utils/constants/routes';
 import type { Specialty } from '@src/types/doctor';
 import type { District } from '@src/types/clinic';
 import type { DropdownItemType } from '@src/types/menu';
 import styles from './styles.module.scss';
 
 const DoctorFilter = () => {
-  const { locale } = useRouter();
+  const router = useRouter();
+  const { locale } = router;
   const homeTranslation = homeTranslations[locale as Locale];
   const [specialties, setSpecialties] = useState<DropdownItemType[]>([]);
   const [districts, setDistricts] = useState<DropdownItemType[]>([]);
@@ -24,7 +27,7 @@ const DoctorFilter = () => {
   const { submit: getSpecialtiesApi } = useApiRequest(getSpecialties);
   const { submit: getDistrictsApi } = useApiRequest(getDistricts);
 
-  const formatDropdownData = (data: Specialty[] | District[]) => data.map(({ name }) => ({ content: name[locale as Locale], key: name['en'] }));
+  const formatDropdownData = (data: Specialty[] | District[]) => data.map(({ name, id }) => ({ content: name[locale as Locale], key: id }));
 
   const init = async () => {
     const resp = await Promise.allSettled([getSpecialtiesApi(), getDistrictsApi()]);
@@ -40,9 +43,15 @@ const DoctorFilter = () => {
     init();
   }, [locale]);
 
-  const handleSearch = useCallback(() => {
-    console.log('currrentSpecialty: ', currrentSpecialty.current);
-    console.log('currrentDistrict: ', currrentDistrict.current);
+  const handleSearch = useCallback(async () => {
+    let params = '';
+    if (currrentSpecialty.current) {
+      params = `specialty=${currrentSpecialty.current}`;
+    }
+    if (currrentDistrict.current) {
+      params = `${params ? `${params}&` : ''}district=${currrentDistrict.current}`;
+    }
+    router.push(`${DOCTORS}?${params}`);
   }, []);
 
   return (

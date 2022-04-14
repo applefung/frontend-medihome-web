@@ -7,15 +7,8 @@ interface GetDoctorsResponse {
   count: number;
 }
 
-interface GetDoctorsParam {
-  searchValue?: string;
-}
-
-const getDoctors = ({ searchValue }: GetDoctorsParam) => {
-  const params = new URLSearchParams({
-    ...(searchValue && { search: searchValue }),
-  });
-  const url = `/doctors${searchValue ? `?${params.toString()}` : ''}`;
+const getDoctors = (params?: string) => {
+  const url = `/doctors${params ? `?${params}` : ''}`;
   return requestService.get<GetDoctorsResponse, ResponseSuccessType<GetDoctorsResponse>>(url);
 };
 

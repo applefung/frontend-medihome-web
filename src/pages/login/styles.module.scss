@@ -1,2 +1,18 @@
 .container {
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .loginPaper {
+      width: 70%;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      .loginBoxContainer {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
 }

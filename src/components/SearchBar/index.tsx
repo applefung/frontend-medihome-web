@@ -29,6 +29,8 @@ const SearchBar = ({ onSearch }: Record<'onSearch', (value: string) => void>) =>
               value.current = event.target.value;
             }}
             onKeyDown={onKeyPress}
+            aria-label="input search text"
+            aria-required="true"
           />
           <IconButton type="submit" onClick={() => onSearch(value.current)}>
             <SearchIcon />
