@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { homeTranslations } from '@src/translations';
+import { homeTranslations, loginTranslations } from '@src/translations';
 import type { Locale } from '@src/types/translations';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
@@ -16,6 +16,7 @@ const Header = ({ isCollapsed = false, setIsCollapsed }: HeaderProps) => {
   const router = useRouter();
   const { locale, asPath } = router;
   const homeTranslation = homeTranslations[locale as Locale];
+  const loginTranslation = loginTranslations[locale as Locale];
 
   const changeLanguage = (locale: Locale) => {
     const toLocale = { locale };
@@ -31,9 +32,9 @@ const Header = ({ isCollapsed = false, setIsCollapsed }: HeaderProps) => {
         <div className={styles.signInContainer}>
           <AccountCircleOutlinedIcon />
           <div className={styles.signInInnerContainer}>
-            <div className={styles.signIn}>{homeTranslation['signIn']}</div>
+            <div className={styles.signIn}>{loginTranslation['login']}</div>
             <div>/</div>
-            <div className={styles.signUp}>{homeTranslation['signUp']}</div>
+            <div className={styles.signUp}>{loginTranslation['signUp']}</div>
           </div>
         </div>
         <div className={styles.languageContainer}>
