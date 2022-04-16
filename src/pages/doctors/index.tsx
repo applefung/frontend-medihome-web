@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
   }
   const resp = await getDoctors(params);
   if (resp.status) {
-    const data = resp.data ? resp.data.data : [];
+    const data = resp.data ?? [];
     return {
       props: { doctors: data },
     };

@@ -1,4 +1,4 @@
-export interface LoginType {
+export interface AuthType {
   accessToken: string;
   accessTokenExpireAt: string;
   refreshToken: string;

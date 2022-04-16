@@ -5,15 +5,13 @@ import Image from 'next/image';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import DoctorBasicInformation from '@src/components/DoctorBasicInformation';
 import ClinicDetail from '@src/components/ClinicDetail';
-import { useApiRequest } from '@src/utils/api';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { getDoctor, getDoctorIds } from '@src/services/doctor';
 import { Doctor } from '@src/types/doctor';
 import { Locale } from '@src/types/common';
 import { LANGUAGES } from '@src/utils/constants/common';
 import { doctorsTranslations } from '@src/translations';
-import { NOT_FOUND } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
 export const getStaticPaths = async () => {

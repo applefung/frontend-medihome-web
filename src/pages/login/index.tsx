@@ -2,6 +2,7 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import LayoutWrapper from '@src/components/LayoutWrapper';
 import { login } from '@src/services/auth';
+import { useAppDispatch } from '@src/stores/hook';
 import { loginTranslations } from '@src/translations';
 import { LoginParam } from '@src/types/auth';
 import { Locale } from '@src/types/translations';
@@ -12,18 +13,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useCallback, useRef } from 'react';
+import { saveAuthInfo } from '@src/stores/authSlice';
 import styles from './styles.module.scss';
+
+const EMPTY_AUTH = {
+  accessToken: '',
+  accessTokenExpireAt: '',
+  refreshToken: '',
+  refreshTokenExpireAt: '',
+};
 
 const Login = () => {
   const { locale } = useRouter();
   const loginTranslation = loginTranslations[locale as Locale];
   const { submit } = useApiRequest(login);
   const userInfo = useRef<LoginParam>({ email: '', password: '' });
+  const dispatch = useAppDispatch();
 
   const handleLogin = useCallback(async () => {
     const { email, password } = userInfo.current;
     const resp = await submit({ email, password });
-    console.log('resp', resp);
+    if (resp?.status) {
+      const data = resp.data ?? EMPTY_AUTH;
+      dispatch(saveAuthInfo(data));
+    }
   }, []);
 
   return (
