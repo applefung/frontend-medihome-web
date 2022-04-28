@@ -13,7 +13,7 @@ import { Fragment } from 'react';
 import { DOCTORS } from '@src/utils/constants/routes';
 import styles from './styles.module.scss';
 
-type DoctorsProps = Record<'doctors', Doctor[]>;
+type DoctorsProps = Record<'doctors', Record<'data', Doctor[]> & Record<'count', number>>;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
   const searchValue = query['search'] ? (query['search'] as string).split('_').join(' ') : '';
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
       props: { doctors: data },
     };
   }
-  return { props: { doctors: [] } };
+  return { props: { doctors: { data: [], count: 0 } } };
 };
 
 const Doctors = ({ doctors }: DoctorsProps) => {
@@ -71,8 +71,8 @@ const Doctors = ({ doctors }: DoctorsProps) => {
           <Section>
             <div className={styles.doctorContainer}>
               <div className={styles.doctorInnerContainer}>
-                {doctors.length ? (
-                  doctors.map(({ name, specialty, clinics, rating, id }, index) => (
+                {doctors.count ? (
+                  doctors.data.map(({ name, specialty, clinics, rating, id }, index) => (
                     <Fragment key={index}>
                       <DoctorCard
                         name={name['fullName'][locale as Locale]}
